@@ -46,11 +46,7 @@ class Y2j < Formula
 
     expected_output = "{\n    \"foo\": \"bar\"\n}"
 
-    require "open3"
-    Open3.popen3("#{bin}/y2j") do |stdin, stdout, _|
-      stdin.write(yaml_test_input)
-      stdin.close
-      assert_equal expected_output, stdout.read
-    end
+    assert_equal expected_output, pipe_output("#{bin}/y2j", yaml_test_input)
+
   end
 end
