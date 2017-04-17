@@ -47,6 +47,5 @@ class Y2j < Formula
     expected_output = "{\n    \"foo\": \"bar\"\n}"
 
     assert_equal expected_output, pipe_output("#{bin}/y2j", yaml_test_input)
-
   end
 end
