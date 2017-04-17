@@ -22,10 +22,7 @@ class Y2j < Formula
     ENV["PYTHONPATH"] = venv_site_packages_path
     venv = virtualenv_create(libexec, "python")
 
-    python_resources = resources.map(&:name).to_set
-    python_resources.each do |r|
-      venv.pip_install resource(r)
-    end
+    venv.pip_install resources
 
     # Force our venv python for use with y2j
     inreplace buildpath/"y2j.sh", /^#!.*bash/,
@@ -33,9 +30,8 @@ class Y2j < Formula
 
     install_script = `./y2j.sh installer #{prefix.to_s}`
 
-    File.open("install_y2j.sh", "w") do |f|
-      f.write(install_script)
-    end
+    (buildpath/"install_y2j.sh").write install_script
+
     chmod 0755, "./install_y2j.sh"
     system "./install_y2j.sh"
 
