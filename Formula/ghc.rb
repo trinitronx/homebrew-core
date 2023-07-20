@@ -139,6 +139,7 @@ class Ghc < Formula
       --prefix=#{prefix}
       --flavour=release
       --docs=no-sphinx-pdfs
+      --docs=no-sphinx-html
     ]
     # Work around linkage error due to RPATH in ghc-iserv-dyn-ghc
     # Issue ref: https://gitlab.haskell.org/ghc/ghc/-/issues/22557
