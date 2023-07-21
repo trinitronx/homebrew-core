@@ -26,6 +26,7 @@ class Ghc < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "8bbdf64a0bcef088b7e9a89d4ff43213de8e4faf746cce595c262b3e11c63153"
   end
 
+  depends_on "libffi"
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "python@3.11" => :build
