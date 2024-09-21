@@ -27,6 +27,9 @@ class BerkeleyDb < Formula
 
   keg_only :provided_by_macos
 
+  # See: https://docs.oracle.com/cd/E17275_01/html/programmer_reference/build_unix_conf.html#build_unix_conf
+  option "with-dump185", "Build the db_dump185 utility, which can dump Berkeley DB 1.85 and 1.86 databases."
+
   depends_on "openssl@3"
 
   # Fix -flat_namespace being used on Big Sur and later.
@@ -57,6 +60,11 @@ class BerkeleyDb < Formula
       --enable-dbm
       --enable-stl
     ]
+
+    if build.with? "enable-dump185"
+      args.append "--enable-dump185"
+      ENV.append "CFLAGS", "-Wno-error=implicit-function-declaration"
+    end
 
     # BerkeleyDB requires you to build everything from the build_unix subdirectory
     cd "build_unix" do
